@@ -5,6 +5,8 @@
 
 package app;
 
+import java.util.Scanner;
+
 import processing.core.PApplet;
 
 public class Aufgaben2 extends PApplet {
@@ -17,7 +19,8 @@ public class Aufgaben2 extends PApplet {
 
   public void setup() {
     // Aufgabe1();
-    Aufgabe2();
+    // Aufgabe2();
+    Aufgabe3();
   }
 
   public void draw() {
@@ -36,5 +39,24 @@ public class Aufgaben2 extends PApplet {
     int[] bar = {2,4,6};
     bar[2] = bar[0] * bar[1];
     println(bar);
+  }
+
+  public void Aufgabe3() {
+    Scanner arraylength = new Scanner(System.in);
+    println("Bitte die Länge des Arrays angbene");
+    int[] foo = new int[arraylength.nextInt()];
+    arraylength.close();
+    
+    for (int i = 0; i < foo.length; i++) {
+      foo[i] = i+1;
+    }
+    println("Nach befüllen");
+    println(foo);
+
+    for (int i = 0; i < foo.length; i++) {
+      foo[i] = foo[i] * 2;
+    }
+    println("Nach verdoppeln");
+    println(foo);
   }
 }
