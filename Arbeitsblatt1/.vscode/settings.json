@@ -1,0 +1,9 @@
+{
+  "files.exclude": {
+    "**/.classpath": false,
+    "**/.project": false,
+    "**/.settings": false,
+    "**/.factorypath": true
+  },
+  "java.dependency.packagePresentation": "hierarchical"
+}
