@@ -8,9 +8,9 @@ import java.util.Scanner;
 import processing.core.*;
 
 
-public class Aufgaben extends PApplet {
+public class Aufgaben1 extends PApplet {
   public static void main(String[] args) {
-      PApplet.main("app.Aufgaben");
+      PApplet.main("app.Aufgaben1");
   }
 
   public void settings() {
