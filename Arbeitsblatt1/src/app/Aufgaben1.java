@@ -96,10 +96,10 @@ public class Aufgaben1 extends PApplet {
     double average = 0;
     Scanner notenScanner = new Scanner(System.in);
 
-    // for (int i = 0; i < noten.length; i++) {
-    //   println("Bitte geben sie für das Lernfeld-" + (i + 1) + " eine Note ein");
-    //   noten[i][0] = notenScanner.nextInt();
-    // }
+    for (int i = 0; i < noten.length; i++) {
+      println("Bitte geben sie für das Lernfeld-" + (i + 1) + " eine Note ein");
+      noten[i][0] = notenScanner.nextInt();
+    }
 
     for (int[] note : noten) {
       double convert = Double.valueOf(note[1]) / 100;
