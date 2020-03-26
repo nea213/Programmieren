@@ -16,7 +16,8 @@ public class Aufgaben2 extends PApplet {
   }
 
   public void setup() {
-    Aufgabe1();
+    // Aufgabe1();
+    Aufgabe2();
   }
 
   public void draw() {
@@ -29,5 +30,11 @@ public class Aufgaben2 extends PApplet {
     int b = foo[2] + foo[3];
     println(a);
     println(b);
+  }
+
+  public void Aufgabe2() {
+    int[] bar = {2,4,6};
+    bar[2] = bar[0] * bar[1];
+    println(bar);
   }
 }
