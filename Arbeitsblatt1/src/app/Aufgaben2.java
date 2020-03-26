@@ -21,7 +21,8 @@ public class Aufgaben2 extends PApplet {
     // Aufgabe1();
     // Aufgabe2();
     // Aufgabe3();
-    println(Aufgabe4(10));
+    // println(Aufgabe4(10));
+    Aufgabe5();
   }
 
   public void draw() {
@@ -83,5 +84,16 @@ public class Aufgaben2 extends PApplet {
       fiboNumbers[start] = tempFibo;
     }
     return fiboNumbers[start];
+  }
+
+  public void Aufgabe5() {
+    int[] a = { 1, 2, 25, 6 };
+    int[] b = { 9, 18, 5, 34 };
+    int[] c = new int[4];
+
+    for (int i = 0; i < c.length; i++) {
+      c[i] = a[i] + b[i];
+    }
+    println(c);
   }
 }
