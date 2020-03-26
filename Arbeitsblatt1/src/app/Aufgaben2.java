@@ -20,7 +20,8 @@ public class Aufgaben2 extends PApplet {
   public void setup() {
     // Aufgabe1();
     // Aufgabe2();
-    Aufgabe3();
+    // Aufgabe3();
+    println(Aufgabe4(10));
   }
 
   public void draw() {
@@ -58,5 +59,29 @@ public class Aufgaben2 extends PApplet {
     }
     println("Nach verdoppeln");
     println(foo);
+  }
+
+
+  public int Aufgabe4(int start) {
+    int[] fiboNumbers = new int[10];
+    
+    if(start > 9) {
+      println("Bitte nur bis 9 eingben oder die Größe des Arrays anpassen");
+      return (0);
+    }
+
+    if(start == 0) {
+      fiboNumbers[0] = 0;
+    }
+
+    if(start == 1) {
+      fiboNumbers[1] = 1;
+    }
+
+    if(fiboNumbers[start] == 0 && start > 0) {
+      int tempFibo = Aufgabe4( start - 1) + Aufgabe4( start - 2);
+      fiboNumbers[start] = tempFibo;
+    }
+    return fiboNumbers[start];
   }
 }
