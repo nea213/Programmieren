@@ -1,5 +1,7 @@
 /**
+ * Aufabgen zu Noten
  * @author Christian Cezanne
+ * 
  **/
 
 package app;
@@ -21,6 +23,11 @@ public class Aufgaben1 extends PApplet {
       // Aufgabe1();
       // Aufgabe3();
       Aufgabe4();
+
+
+      // Aufgabe2: 
+      // Der Vorteil von Schleifen bei Array ist das man nicht immer genau weiß wie viele Einträge es im Array gibt.
+      // Genau so weis man nicht an welcher Stelle das Objekt liegt was man sucht.       
   }
 
   public void draw() {
