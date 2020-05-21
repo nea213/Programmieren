@@ -1,35 +1,52 @@
 package app;
 
 import processing.core.*;
+import java.util.Arrays;
 
 public class pandemie extends PApplet {
-  boolean[] infected;
+  boolean[] infectedGlobal;
+  int lastY;
+  boolean[] allInfected;
+
   int days = 0;
   public static void main(String[] args) {
     PApplet.main("app.pandemie");
   }
 
   public void setup() { 
-    background(0);
+    frameRate(1);
+    infectedGlobal = calcInfestet(100, 5);
+    
   }
   
   public void settings() {
     size(500, 500);  
-    infected = calcInfestet(100, 5);
   }
   
   public void draw() {
+    background(0);
     fill(255);
     textSize(25);
     textAlign(CENTER);
     text("Pandemie", width/2, 35);
     text("Tage: " + days, width/2, 60);
-    drawRects(infected);
+    drawRects(infectedGlobal);
+    if(!infectedGlobal.equals(allInfected)) {
+      infectPepole(infectedGlobal);
+      textSize(20);
+      textAlign(LEFT);
+      fill(255);
+      text("Anzahl der Personen: " + infectedGlobal.length, 100, (lastY + 30));
+      text("Warscheinlichkeit: 5%", 100, (lastY + 60));
+    }
   }
-
+  
   public boolean[] calcInfestet(int pepole, double chance) {
     boolean[] infected = new boolean[pepole];
-
+    boolean[] temp = new boolean[pepole];
+    Arrays.fill(temp, true);
+    allInfected = temp;
+    
     for (int i = 0; i < infected.length; i++) {
       if(Math.random() * 100 < chance) {
         infected[i] = true;
@@ -37,7 +54,7 @@ public class pandemie extends PApplet {
         infected[i] = false;
       }
     }
-
+    
     for (int i = 0; i < infected.length; i++) {
       print(infected[i] + " ");
     }
@@ -63,5 +80,25 @@ public class pandemie extends PApplet {
       }
       posX += 15;
     }
+    lastY = posY;
+  }
+
+  public void infectPepole(boolean[] infected) {
+    for (int i = 0; i < infected.length; i++) {
+      if(infected[i]) {
+        if(i == 0) {
+          infected[i + 1] = true;
+          i++;
+        } else if (i == infected.length - 1) {
+          infected[i - 1] = true;
+        } else { 
+          infected[i + 1] = true;
+          infected[i - 1] = true;
+          i++;
+        }
+      }
+    }
+    infectedGlobal = infected;
+    days++;
   }
 }
