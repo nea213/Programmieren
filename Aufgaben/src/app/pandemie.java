@@ -5,7 +5,7 @@ import processing.core.*;
 public class pandemie extends PApplet {
   boolean[] infectedGlobal;
   int lastY;
-  boolean[] allInfected;
+  int countInfected = 0;
 
   int days = 0;
   public static void main(String[] args) {
@@ -81,17 +81,26 @@ public class pandemie extends PApplet {
 
   public void infectPeople(boolean[] infected) {
     for (int i = 0; i < infected.length; i++) {
-      if(infected[i]) {
-        if(i == 0) {
-          infected[i + 1] = true;
+      if (!infected[i]) {
+        continue;
+      }
+      if(i == 0 && infected[0]) {
+        if(!infected[i + 1]) {
           i++;
-        } else if (i == infected.length - 1) {
-          infected[i - 1] = true;
-        } else { 
-          infected[i + 1] = true;
-          infected[i - 1] = true;
-          i++;
+          infected[i] = true;
+          countInfected++;
         }
+        continue;
+      }
+      if(!infected[i - 1]) {
+        infected[i - 1] = true;
+        countInfected++;
+        i++;
+      }
+      if(i + 1 < infected.length && !infected[i + 1]) {
+        infected[i + 1] = true;
+        countInfected++;
+        i++;
       }
     }
     infectedGlobal = infected;
