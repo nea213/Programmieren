@@ -1,7 +1,6 @@
 package app;
 
 import processing.core.*;
-import java.util.Arrays;
 
 public class pandemie extends PApplet {
   boolean[] infectedGlobal;
@@ -15,7 +14,7 @@ public class pandemie extends PApplet {
 
   public void setup() { 
     frameRate(1);
-    infectedGlobal = calcInfestet(100, 5);
+    infectedGlobal = calcInfested(100, 5);
     
   }
   
@@ -32,7 +31,7 @@ public class pandemie extends PApplet {
     text("Tage: " + days, width/2, 60);
     drawRects(infectedGlobal);
     if(!infectedGlobal.equals(allInfected)) {
-      infectPepole(infectedGlobal);
+      infectPeople(infectedGlobal);
       textSize(20);
       textAlign(LEFT);
       fill(255);
@@ -41,11 +40,8 @@ public class pandemie extends PApplet {
     }
   }
   
-  public boolean[] calcInfestet(int pepole, double chance) {
-    boolean[] infected = new boolean[pepole];
-    boolean[] temp = new boolean[pepole];
-    Arrays.fill(temp, true);
-    allInfected = temp;
+  public boolean[] calcInfested(int people, double chance) {
+    boolean[] infected = new boolean[people];
     
     for (int i = 0; i < infected.length; i++) {
       if(Math.random() * 100 < chance) {
@@ -83,7 +79,7 @@ public class pandemie extends PApplet {
     lastY = posY;
   }
 
-  public void infectPepole(boolean[] infected) {
+  public void infectPeople(boolean[] infected) {
     for (int i = 0; i < infected.length; i++) {
       if(infected[i]) {
         if(i == 0) {
