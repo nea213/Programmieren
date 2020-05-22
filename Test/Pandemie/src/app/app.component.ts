@@ -19,19 +19,7 @@ export class AppComponent implements OnInit {
   constructor(private _dialog: MatDialog) {}
 
   ngOnInit() {
-    this._calcInfected(this.people, this.infectChance);
-  }
-
-  private _calcInfected(people: number, infectChance: number) {
-    this.days = 0;
-    this.infectedPeople = [];
-    for (let i = 0; i < people; i++) {
-      if (Math.random() * 100 < infectChance) {
-        this.infectedPeople.push(true);
-      } else {
-        this.infectedPeople.push(false);
-      }
-    }
+    this._calcInfectedFirstTime(this.people, this.infectChance);
   }
 
   openDialog() {
@@ -44,15 +32,19 @@ export class AppComponent implements OnInit {
   }
 
   setPeople() {
-    this._calcInfected(this.people, this.infectChance);
+    this._calcInfectedFirstTime(this.people, this.infectChance);
   }
 
   infectAllPeople(infectedPeople: boolean[]) {
     if (infectedPeople.filter((x) => !x).length !== 0) {
+      infectedPeople = this._calcInfectedOnTurn(
+        infectedPeople,
+        this.infectChance
+      );
       this.isCalculating = true;
       this.days++;
       setTimeout(() => {
-        for (let i = 0; i < this.infectedPeople.length; i++) {
+        for (let i = 0; i < infectedPeople.length; i++) {
           if (!infectedPeople[i]) {
             continue;
           }
@@ -78,5 +70,31 @@ export class AppComponent implements OnInit {
       this.isCalculating = false;
       this.openDialog();
     }
+  }
+
+  private _calcInfectedFirstTime(people: number, infectChance: number) {
+    this.days = 0;
+    this.infectedPeople = [];
+    for (let i = 0; i < people; i++) {
+      if (Math.random() * 100 < infectChance) {
+        this.infectedPeople.push(true);
+      } else {
+        this.infectedPeople.push(false);
+      }
+    }
+  }
+
+  private _calcInfectedOnTurn(
+    infectedPeople: boolean[],
+    infectChance: number
+  ): boolean[] {
+    for (let i = 0; i < infectedPeople.length; i++) {
+      if (!infectedPeople[i]) {
+        if (Math.random() * 100 < infectChance) {
+          infectedPeople[i] = true;
+        }
+      }
+    }
+    return infectedPeople;
   }
 }
