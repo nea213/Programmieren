@@ -24,7 +24,8 @@
     </ng-container>
   </div>
   <div class="mt-3 d-flex justify-content-center">
-    <button mat-raised-button color="primary" (click)="setPeople()"> {{'Calculate'}} </button>
+    <button mat-raised-button color="primary" (click)="setPeople()" [disabled]="isCalculating"> {{'Calculate'}}
+    </button>
     <button class="ml-3" mat-raised-button color="warn" (click)="infectAllPeople(infectedPeople)"> {{'Start Infection'}}
     </button>
   </div>

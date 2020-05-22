@@ -11,11 +11,11 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { DialogComponent } from './dialog.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { ResultDialogComponent } from './dialog/dialog.component';
+import { ResultDialogModule } from './dialog/dialog.module';
 
 @NgModule({
-  declarations: [AppComponent, DialogComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -27,11 +27,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
-    MatDialogModule,
+    ResultDialogModule,
   ],
-  providers: [],
+  providers: [ResultDialogComponent],
   bootstrap: [AppComponent],
-  entryComponents: [DialogComponent],
+  entryComponents: [ResultDialogComponent],
 })
 export class AppModule {
   constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {

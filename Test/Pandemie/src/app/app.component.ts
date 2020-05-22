@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ResultDialogComponent, IData } from './dialog/dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +14,16 @@ export class AppComponent implements OnInit {
   people = 100;
   infectChance = 5;
   infectedPeople: boolean[];
+  isCalculating = false;
 
-  constructor() {}
+  constructor(private _dialog: MatDialog) {}
 
   ngOnInit() {
     this._calcInfected(this.people, this.infectChance);
   }
 
   private _calcInfected(people: number, infectChance: number) {
+    this.days = 0;
     this.infectedPeople = [];
     for (let i = 0; i < people; i++) {
       if (Math.random() * 100 < infectChance) {
@@ -30,12 +34,22 @@ export class AppComponent implements OnInit {
     }
   }
 
+  openDialog() {
+    this._dialog.open(ResultDialogComponent, {
+      data: {
+        days: this.days,
+        people: this.people,
+      } as IData,
+    });
+  }
+
   setPeople() {
     this._calcInfected(this.people, this.infectChance);
   }
 
   infectAllPeople(infectedPeople: boolean[]) {
     if (infectedPeople.filter((x) => !x).length !== 0) {
+      this.isCalculating = true;
       this.days++;
       setTimeout(() => {
         for (let i = 0; i < this.infectedPeople.length; i++) {
@@ -61,6 +75,8 @@ export class AppComponent implements OnInit {
         return this.infectAllPeople(infectedPeople);
       }, 300);
     } else {
+      this.isCalculating = false;
+      this.openDialog();
     }
   }
 }
