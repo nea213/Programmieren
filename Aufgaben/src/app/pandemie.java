@@ -39,8 +39,8 @@ public class pandemie extends PApplet {
       text("Pandemie", 200, 50);
       textSize(20);
       // Eingabeaufforderung
-      text("Bitte geben Sie die Häufigkeit der Infektion in einer\nnummerischen Zahl an und " +
-      "drücken Sie anschliessend\ndie Return-Taste.", 25, 100);
+      text("Bitte geben Sie die Häufigkeit der Infektion in \neiner nummerischen Zahl an und " +
+      "drücken Sie \nanschliessend die Return-Taste.", 25, 100);
       text("Eingabe: " + typing, 25, 220);
 
     } else {
@@ -62,7 +62,7 @@ public class pandemie extends PApplet {
         textSize(20);
         textAlign(LEFT);
         fill(255);
-        text("Es sind alle Personen nach " + days + " Tagen infiziert", 50, (lastY + 30));
+        text("Es sind alle Personen nach " + days + " Tagen infiziert", 25, (lastY + 30));
         noLoop();
       }
     }
@@ -88,7 +88,7 @@ public class pandemie extends PApplet {
     return infected;
   }
 
-  //Funktion zum zeichner der Rechtecke
+  //Funktion zum zeichnen der Rechtecke
   public void drawRects(boolean[] infected) {
     int posY = 100;
     int posX = 100;
