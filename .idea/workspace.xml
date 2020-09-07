@@ -31,10 +31,21 @@
       <updated>1599493051145</updated>
       <workItem from="1599493060529" duration="60000" />
       <workItem from="1599493127842" duration="2000" />
+      <workItem from="1599494269762" duration="27000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1061" y="442" key="FileChooserDialogImpl" timestamp="1599494294627">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1061" y="442" key="FileChooserDialogImpl/3840.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1599494294627" />
+    <state x="731" y="321" key="new project wizard" timestamp="1599494295841">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="731" y="321" key="new project wizard/3840.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1599494295841" />
   </component>
 </project>
