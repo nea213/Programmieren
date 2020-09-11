@@ -1,4 +1,5 @@
 ﻿using System;
+using CC_HandyClass;
 
 namespace CC_HandyApp
 {
@@ -6,7 +7,18 @@ namespace CC_HandyApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var handy = new Handy();
+            handy.SetId(1);
+            handy.SetProducer("Apple");
+            handy.SetModel("XS");
+            handy.SetSerialNumber("XSAP");
+            handy.SetPrice(120.00);
+
+            Console.WriteLine(handy.GetId());
+            Console.WriteLine(handy.GetProducer());
+            Console.WriteLine(handy.GetModel());
+            Console.WriteLine(handy.GetSerialNumber());
+            Console.WriteLine(handy.GetPrice());
         }
     }
 }
