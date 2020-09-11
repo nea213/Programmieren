@@ -8,17 +8,17 @@ namespace CC_HandyApp
         static void Main(string[] args)
         {
             var handy = new Handy();
-            handy.SetId(1);
-            handy.SetProducer("Apple");
-            handy.SetModel("XS");
-            handy.SetSerialNumber("XSAP");
-            handy.SetPrice(120.00);
+            handy.Id = 1;
+            handy.Producer = "Apple";
+            handy.Model = "XS";
+            handy.SerialNumber = "XSAP";
+            handy.Price = 120.00;
 
-            Console.WriteLine(handy.GetId());
-            Console.WriteLine(handy.GetProducer());
-            Console.WriteLine(handy.GetModel());
-            Console.WriteLine(handy.GetSerialNumber());
-            Console.WriteLine(handy.GetPrice());
+            Console.WriteLine(handy.Id);
+            Console.WriteLine(handy.Producer);
+            Console.WriteLine(handy.Model);
+            Console.WriteLine(handy.SerialNumber);
+            Console.WriteLine(handy.Price);
         }
     }
 }
