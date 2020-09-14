@@ -9,6 +9,7 @@ public class password_gen {
             int rnd = r.nextInt(10);
             pw.append(rnd);
         }
+
         return pw.toString();
     }
 
@@ -33,6 +34,7 @@ public class password_gen {
             var user_input = input.nextInt();
             if (user_input == 1 || user_input == 2){
                 if (user_input == 1) {
+                    input.close();
                     while (true) {
                         System.out.println(gen_number());
                         Thread.sleep(15000);
@@ -40,6 +42,7 @@ public class password_gen {
                 } else {
                     System.out.println("Bitte geben sie eine Zeichenlänge ein");
                     var count = input.nextInt();
+                    input.close();
                     while (true) {
                         System.out.println(gen_Chars(count));
                         Thread.sleep(30000);
