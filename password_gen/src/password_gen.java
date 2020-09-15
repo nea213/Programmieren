@@ -2,6 +2,20 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Ein Programm zu generriern von Passwörten
+ * Es wird gefragt wie viele Passwörter auf einmal Generriert werden sollen
+ * <p>
+ * 1) Generriert sechs Stelligen Zahlen PW alle - 15sec
+ * 2) Generriert Zeichen PW [a-z] - alle 30sec
+ * 3) Generriert Zeichen PW [a-z][A-Z] - alle 30sec
+ * <p>
+ * <p>
+ * Bei Zeichen Passwörter wird auch nicht die Länge gefragt
+ *
+ * @author Christian Cezanne
+ */
+
 public class password_gen {
     public static void gen_number(int pw_count) {
         ArrayList<String> pw_array = new ArrayList<String>();
