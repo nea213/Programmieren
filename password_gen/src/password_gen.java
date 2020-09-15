@@ -1,45 +1,58 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class password_gen {
     public static void gen_number(int pw_count) {
+        ArrayList<String> pw_array = new ArrayList<String>();
         Random r = new Random();
         for (int i = 0; i < pw_count; i++) {
-            StringBuilder pw = new StringBuilder();
+            StringBuilder pw_builder = new StringBuilder();
 
             for (int x = 0; x < 6; x++) {
                 int rnd = r.nextInt(10);
-                pw.append(rnd);
+                pw_builder.append(rnd);
             }
+            if (!pw_array.contains(pw_builder.toString())) {
+                pw_array.add(pw_builder.toString());
+            }
+        }
+        for (String pw: pw_array) {
             System.out.println(pw);
         }
     }
 
     public static void gen_Chars(int pw_length, int pw_count, boolean small_large) {
         Random r = new Random();
+        ArrayList<String> pw_array = new ArrayList<String>();
         if (small_large) {
             for (int i = 0; i < pw_count; i++) {
-                StringBuilder pw = new StringBuilder();
+                StringBuilder pw_builder = new StringBuilder();
                 for (int x = 0; x < pw_length; x++) {
                     int rnd = (r.nextInt(52));
                     char base = (rnd < 26) ? 'A' : 'a';
-                    pw.append((char) (base + rnd % 26));
+                    pw_builder.append((char) (base + rnd % 26));
                 }
-                System.out.println(pw);
+                if(!pw_array.contains(pw_builder.toString())) {
+                    pw_array.add(pw_builder.toString());
+                }
             }
         } else {
             for (int i = 0; i < pw_count; i++) {
-                StringBuilder pw = new StringBuilder();
+                StringBuilder pw_builder = new StringBuilder();
 
                 for (int x = 0; x < pw_length; x++) {
                     int rnd = (r.nextInt(26) + 'a');
-                    pw.append((char) rnd);
+                    pw_builder.append((char) rnd);
                 }
-                System.out.println(pw);
+                if(!pw_array.contains(pw_builder.toString())) {
+                    pw_array.add(pw_builder.toString());
+                }
             }
         }
-
-
+        for (String pw: pw_array) {
+            System.out.println(pw);
+        }
     }
 
 
@@ -57,7 +70,7 @@ public class password_gen {
                         while (true) {
                             gen_number(pw_count);
                             System.out.println("________________________________________");
-                            Thread.sleep(1000);
+                            Thread.sleep(15000);
                         }
                     case 2:
                         System.out.println("Bitte geben sie eine Zeichenlänge ein");
@@ -65,7 +78,7 @@ public class password_gen {
                         while (true) {
                             gen_Chars(pw_length, pw_count, false);
                             System.out.println("________________________________________");
-                            Thread.sleep(1000);
+                            Thread.sleep(30000);
                         }
                     case 3:
                         System.out.println("Bitte geben sie eine Zeichenlänge ein");
@@ -73,7 +86,7 @@ public class password_gen {
                         while (true) {
                             gen_Chars(pw_length_char, pw_count, true);
                             System.out.println("________________________________________");
-                            Thread.sleep(1000);
+                            Thread.sleep(30000);
                         }
                     default:
                         return;
