@@ -15,9 +15,16 @@ public class password_gen {
             }
             if (!pw_array.contains(pw_builder.toString())) {
                 pw_array.add(pw_builder.toString());
+            } else {
+                while (pw_array.contains(pw_builder.toString())) {
+                    for (int x = 0; x < 6; x++) {
+                        int rnd = r.nextInt(10);
+                        pw_builder.append(rnd);
+                    }
+                }
             }
         }
-        for (String pw: pw_array) {
+        for (String pw : pw_array) {
             System.out.println(pw);
         }
     }
@@ -33,8 +40,16 @@ public class password_gen {
                     char base = (rnd < 26) ? 'A' : 'a';
                     pw_builder.append((char) (base + rnd % 26));
                 }
-                if(!pw_array.contains(pw_builder.toString())) {
+                if (!pw_array.contains(pw_builder.toString())) {
                     pw_array.add(pw_builder.toString());
+                } else {
+                    while (pw_array.contains(pw_builder)) {
+                        for (int x = 0; x < pw_length; x++) {
+                            int rnd = (r.nextInt(52));
+                            char base = (rnd < 26) ? 'A' : 'a';
+                            pw_builder.append((char) (base + rnd % 26));
+                        }
+                    }
                 }
             }
         } else {
@@ -45,12 +60,20 @@ public class password_gen {
                     int rnd = (r.nextInt(26) + 'a');
                     pw_builder.append((char) rnd);
                 }
-                if(!pw_array.contains(pw_builder.toString())) {
+                if (!pw_array.contains(pw_builder.toString())) {
                     pw_array.add(pw_builder.toString());
+                } else {
+                    while (pw_array.contains(pw_builder)) {
+                        for (int x = 0; x < pw_length; x++) {
+                            int rnd = (r.nextInt(52));
+                            char base = (rnd < 26) ? 'A' : 'a';
+                            pw_builder.append((char) (base + rnd % 26));
+                        }
+                    }
                 }
             }
         }
-        for (String pw: pw_array) {
+        for (String pw : pw_array) {
             System.out.println(pw);
         }
     }
@@ -62,7 +85,7 @@ public class password_gen {
             System.out.println("1) Zahlen Passwort, 2) Zeichenpasswort[a-z] oder 3) Zeichenpasswort[a-z][A-Z]");
             var user_input = input.nextInt();
 
-            if (user_input == 1 || user_input == 2 || user_input == 3){
+            if (user_input == 1 || user_input == 2 || user_input == 3) {
                 System.out.println("Wie viele Passwörter möchten sie auf einmal generrieren?");
                 int pw_count = input.nextInt();
                 switch (user_input) {
@@ -70,7 +93,7 @@ public class password_gen {
                         while (true) {
                             gen_number(pw_count);
                             System.out.println("________________________________________");
-                            Thread.sleep(15000);
+                            Thread.sleep(1000);
                         }
                     case 2:
                         System.out.println("Bitte geben sie eine Zeichenlänge ein");
@@ -78,7 +101,7 @@ public class password_gen {
                         while (true) {
                             gen_Chars(pw_length, pw_count, false);
                             System.out.println("________________________________________");
-                            Thread.sleep(30000);
+                            Thread.sleep(1000);
                         }
                     case 3:
                         System.out.println("Bitte geben sie eine Zeichenlänge ein");
@@ -86,10 +109,9 @@ public class password_gen {
                         while (true) {
                             gen_Chars(pw_length_char, pw_count, true);
                             System.out.println("________________________________________");
-                            Thread.sleep(30000);
+                            Thread.sleep(1000);
                         }
                     default:
-                        return;
                 }
             }
         }
