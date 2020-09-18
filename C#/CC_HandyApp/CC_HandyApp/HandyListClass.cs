@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CC_HandyClass;
 
@@ -19,3 +20,17 @@ namespace CC_HandyApp
 
             return count;
         }
+
+        public double SumPrice()
+        {
+            var count = 0.0;
+
+            foreach (var handy in this)
+            {
+                count += handy.Price;
+            }
+
+            return count;
+        }
+    }
+}

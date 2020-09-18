@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using CC_HandyClass;
 
@@ -18,7 +18,7 @@ namespace CC_HandyApp
                 var h = new Handy
                 {
                     Id = i + 1,
-                    Price = Math.Round((rnd.NextDouble() * (200 - 0) + 200), 2),
+                    Price = Math.Round((rnd.NextDouble() * (400 - 100) + 400), 2),
                     Model = new string(chars.Select(c => chars[rnd.Next(chars.Length)]).Take(8).ToArray()),
                     Producer = producers[rnd.Next(0,3)],
                     SerialNumber = new string(chars.Select(c => chars[rnd.Next(chars.Length)]).Take(8).ToArray()),
@@ -40,6 +40,7 @@ namespace CC_HandyApp
             Console.WriteLine($"Apple: {handyList.CountProducer("Apple")}");
             Console.WriteLine($"Samsung: {handyList.CountProducer("Samsung")}");
             Console.WriteLine($"Huawei: {handyList.CountProducer("Huawei")}");
+            Console.WriteLine(($"Gesammtsumme: {handyList.SumPrice()}"));
         }
     }
 }
