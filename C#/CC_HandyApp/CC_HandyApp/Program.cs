@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using CC_HandyClass;
 
@@ -27,15 +27,19 @@ namespace CC_HandyApp
                 handyList.Add(h);
             }
 
-            foreach (var h in handyList)
-            {
-                Console.WriteLine(h.Id);
-                Console.WriteLine(h.Producer);
-                Console.WriteLine(h.Model);
-                Console.WriteLine(h.SerialNumber);
-                Console.WriteLine(h.Price);
-                Console.WriteLine("_______________________________");
-            }
+            // foreach (var h in handyList)
+            // {
+            //     Console.WriteLine(h.Id);
+            //     Console.WriteLine(h.Producer);
+            //     Console.WriteLine(h.Model);
+            //     Console.WriteLine(h.SerialNumber);
+            //     Console.WriteLine(h.Price);
+            //     Console.WriteLine("_______________________________");
+            // }
+            
+            Console.WriteLine($"Apple: {handyList.CountProducer("Apple")}");
+            Console.WriteLine($"Samsung: {handyList.CountProducer("Samsung")}");
+            Console.WriteLine($"Huawei: {handyList.CountProducer("Huawei")}");
         }
     }
 }
