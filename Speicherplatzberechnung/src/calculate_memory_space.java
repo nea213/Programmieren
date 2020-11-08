@@ -26,12 +26,24 @@ public class calculate_memory_space {
         length = Integer.parseInt(length_height[0]);
         height = Integer.parseInt(length_height[1]);
 
-        System.out.println("Bitte geben sie die die Farbiefe: ");
-        colorType = input.nextInt();
+        while (true) {
+            System.out.println("Bitte geben sie die die Farbiefe in Bytes an: ");
+            colorType = input.nextInt();
+            if (IsPowerOfTwo(colorType)) {
+                break;
+            } else {
+                System.out.println("Es handelt sich hier bei nicht um eine 2-Potenz");
+            }
+        }
 
         System.out.println("Bitte geben sie den Komprimierungsfactor ein: ");
         compression = input.nextInt();
 
         calculate(length, height, colorType, compression);
+    }
+
+    static boolean IsPowerOfTwo(int x)
+    {
+        return (x != 0) && ((x & (x - 1)) == 0);
     }
 }
