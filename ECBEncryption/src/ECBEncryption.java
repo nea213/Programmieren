@@ -146,7 +146,13 @@ public class ECBEncryption {
     }
 
     static char[] bitsToText(char[] bits, int size) {
-        return null;
+        int numberOfBlocks = bits.length / size;
+        char[][] splitInBlock = bitsToBlocks(bits, size);
+        char[] result = new char[numberOfBlocks];
+        for (int i = 0; i < numberOfBlocks; i++) {
+            result[i] = bitsToSymbol(splitInBlock[i]);
+        }
+        return result;
     }
 
     //
