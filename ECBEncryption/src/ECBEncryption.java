@@ -142,7 +142,7 @@ public class ECBEncryption {
     //
 
     static char bitsToSymbol(char[] bits) {
-        return ' ';
+        return decryptionCodeMap.get(new String(bits));
     }
 
     static char[] bitsToText(char[] bits, int size) {
