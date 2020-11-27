@@ -59,7 +59,8 @@ public class ECBEncryption {
     //
 
     static char[] symbolToBits(char symbol) {
-        return null;
+        String result = encryptionCodeMap.get(symbol);
+        return result.toCharArray();
     }
 
     static char[] textToBits(String text) {
