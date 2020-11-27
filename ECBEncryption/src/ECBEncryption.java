@@ -95,7 +95,16 @@ public class ECBEncryption {
     }
 
     static char[][] bitsToBlocks(char[] bits, int size) {
-        return null;
+        int numberOfBlocks = bits.length / size;
+        char[][] result = new char[numberOfBlocks][];
+
+        for (int i = 0; i < numberOfBlocks; i++) {
+            char[] temp = new char[size];
+            System.arraycopy(bits, (i * size), temp, 0, size);
+            result[i] = temp;
+        }
+
+        return result;
     }
 
     //
