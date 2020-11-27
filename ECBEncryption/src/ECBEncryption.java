@@ -112,7 +112,11 @@ public class ECBEncryption {
     //
 
     static char[][] encryptBlocks(char[][] blocks) {
-        return null;
+        char[][] result = new char[blocks.length][];
+        for (int i = 0; i < blocks.length; i++) {
+            result[i] = shiftRight(blocks[i]);
+        }
+        return result;
     }
 
     //
