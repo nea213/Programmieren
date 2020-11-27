@@ -64,7 +64,11 @@ public class ECBEncryption {
     }
 
     static char[] textToBits(String text) {
-        return null;
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+            result.append(encryptionCodeMap.get(text.charAt(i)));
+        }
+        return result.toString().toCharArray();
     }
 
     //
