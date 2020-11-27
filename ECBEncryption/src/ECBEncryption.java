@@ -124,7 +124,17 @@ public class ECBEncryption {
     //
 
     static char[] blocksToBits(char[][] blocks) {
-        return null;
+        int lengthOfResultArray = blocks.length * blocks[0].length;
+        char[] result = new char[lengthOfResultArray];
+
+        for (int i = 0; i < blocks.length; i++) {
+            for (int j = 0; j < blocks[i].length; j++) {
+                int posToSet = (i * blocks[i].length) + j;
+                result[posToSet] = blocks[i][j];
+            }
+        }
+        
+        return result;
     }
 
     //
