@@ -76,7 +76,11 @@ public class ECBEncryption {
     //
 
     static char[] firstN(char[] bits, int n) {
-        return null;
+        char[] result = new char[n];
+        for (int i = 0; i < n; i++) {
+            result[i] = bits[i];
+        }
+        return result;
     }
 
     static char[] lastN(char[] bits, int n) {
