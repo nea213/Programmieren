@@ -84,7 +84,14 @@ public class ECBEncryption {
     }
 
     static char[] lastN(char[] bits, int n) {
-        return null;
+        char[] result = new char[bits.length - n];
+        int counter = 0;
+        for (int i = n; i < bits.length; i++) {
+            result[counter] = bits[i];
+            counter++;
+        }
+
+        return result;
     }
 
     static char[][] bitsToBlocks(char[] bits, int size) {
