@@ -100,8 +100,10 @@ public class ECBEncryption {
 
         for (int i = 0; i < numberOfBlocks; i++) {
             char[] temp = new char[size];
-            System.arraycopy(bits, (i * size), temp, 0, size);
-            result[i] = temp;
+            for (int j = 0; j < size; j++) {
+                temp[j] = bits[(i * size) + j];
+                result[i] = temp;
+            }
         }
 
         return result;
