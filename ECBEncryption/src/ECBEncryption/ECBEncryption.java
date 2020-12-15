@@ -1,3 +1,6 @@
+package ECBEncryption;
+
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -15,13 +18,18 @@ public class ECBEncryption {
     static HashMap<Character, String> encryptionCodeMap = createEncryptionCodeMap();
     static HashMap<String, Character> decryptionCodeMap = createDecryptionCodeMap();
 
-    public static void main(String[] args) {
+    public ECBEncryption() {
+
+    }
+
+    public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
         while (true) {
             System.out.println("Willkommen bei PlanetExpress!");
             System.out.println("Welchen Modus möchten Sie nutzen?");
             System.out.println("1) Verschlüsselung einer Nachricht");
             System.out.println("2) Entschlüsselung einer Nachricht");
-            System.out.println("3) Beenden");
+            System.out.println("3) Starten der GUI");
+            System.out.println("4) Beenden");
 
             Scanner sc = new Scanner(System.in); // anlegen von einem Scanner Objekt
             int userInput = sc.nextInt(); // Einlesen der Auswahl
@@ -50,7 +58,15 @@ public class ECBEncryption {
                     break;
                 }
             }
-            if (userInput == 3) {
+
+            if(userInput == 3) {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                ECBEncryptionGUI gui = new ECBEncryptionGUI();
+                gui.runGUI();
+                break;
+            }
+
+            if (userInput == 4) {
                 sc.close(); // schliessen des Scanner Objekts
                 break;
             }
@@ -205,6 +221,57 @@ public class ECBEncryption {
         return new String(bitsToText);
     }
 
+    // Zusatz Aufgaben
+
+    static boolean isTextOke(String text) {
+        boolean result = true;
+        for (int i = 0; i < text.length(); i++) {
+            if(result) {
+                result = encryptionCodeMap.containsKey(text.charAt(i));
+            } else {
+                System.out.println("Es tut mir leid aber ihr Text enthält unzulässige Zeichen!");
+                System.out.println("Das Zeichen ( " + text.charAt(i - 1) + " ) ist unzulässig\n");
+                break;
+            }
+        }
+        return result;
+    }
+
+    public String decryptGUI(String text, int blockSize) {
+        var textToBits = textToBits(text);
+        var bitsToBlocks = bitsToBlocks(textToBits, blockSize);
+        var blockShift = decryptBlocks(bitsToBlocks);
+        var blockToBits = blocksToBits(blockShift);
+        var bitsToText = bitsToText(blockToBits, symbolLenght());
+        return new String(bitsToText);
+    }
+
+    public String encryptGUI(String text, int blockSize) {
+        var textToBits = textToBits(text);
+        var bitsToBlocks = bitsToBlocks(textToBits, blockSize);
+        var blockShift = encryptBlocks(bitsToBlocks);
+        var blockToBits = blocksToBits(blockShift);
+        var bitsToText = bitsToText(blockToBits, symbolLenght());
+        return new String(bitsToText);
+    }
+
+    public boolean isTextOkeGUI(String text) {
+        boolean result = true;
+        for (int i = 0; i < text.length(); i++) {
+            result = encryptionCodeMap.containsKey(text.charAt(i));
+            if(!result) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Der Buchstabe ( " + text.charAt(i) + " ) ist nicht erlaubt",
+                        "Der Text enthält unzulassige Zeichen",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return result;
+            }
+        }
+        return result;
+    }
+
     // ************************************************************
     // HIER ENDET IHR QUELLCODE
     //
@@ -260,20 +327,6 @@ public class ECBEncryption {
 
     static int symbolLenght() {
         return 5;
-    }
-
-    static boolean isTextOke(String text) {
-        boolean result = true;
-        for (int i = 0; i < text.length(); i++) {
-            if(result) {
-                result = encryptionCodeMap.containsKey(text.charAt(i));
-            } else {
-                System.out.println("Es tut mir leid aber ihr Text enthält unzulässige Zeichen!");
-                System.out.println("Das Zeichen ( " + text.charAt(i - 1) + " ) ist unzulässig\n");
-                break;
-            }
-        }
-        return result;
     }
 
     /**
