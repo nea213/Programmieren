@@ -172,12 +172,11 @@ public class ECBEncryption {
     //
 
     static String encrypt(String text, int blockSize) {
-        blockSize = symbolLenght();
         var textToBits = textToBits(text);
         var bitsToBlocks = bitsToBlocks(textToBits, blockSize);
         var blockShift = encryptBlocks(bitsToBlocks);
         var blockToBits = blocksToBits(blockShift);
-        var bitsToText = bitsToText(blockToBits, blockSize);
+        var bitsToText = bitsToText(blockToBits, symbolLenght());
         return new String(bitsToText);
     }
 
@@ -198,12 +197,11 @@ public class ECBEncryption {
     //
 
     static String decrypt(String text, int blockSize) {
-        blockSize = symbolLenght();
         var textToBits = textToBits(text);
         var bitsToBlocks = bitsToBlocks(textToBits, blockSize);
         var blockShift = decryptBlocks(bitsToBlocks);
         var blockToBits = blocksToBits(blockShift);
-        var bitsToText = bitsToText(blockToBits, blockSize);
+        var bitsToText = bitsToText(blockToBits, symbolLenght());
         return new String(bitsToText);
     }
 
