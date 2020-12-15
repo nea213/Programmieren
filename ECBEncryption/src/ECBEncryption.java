@@ -102,8 +102,8 @@ public class ECBEncryption {
             char[] temp = new char[size];
             for (int j = 0; j < size; j++) {
                 temp[j] = bits[(i * size) + j];
-                result[i] = temp;
             }
+            result[i] = temp;
         }
 
         return result;
@@ -162,7 +162,13 @@ public class ECBEncryption {
     //
 
     static String encrypt(String text, int blockSize) {
-        return null;
+        blockSize = symbolLenght();
+        var textToBits = textToBits(text);
+        var bitsToBlocks = bitsToBlocks(textToBits, blockSize);
+        var blockShift = encryptBlocks(bitsToBlocks);
+        var blockToBits = blocksToBits(blockShift);
+        var bitsToText = bitsToText(blockToBits, blockSize);
+        return new String(bitsToText);
     }
 
     //
@@ -182,7 +188,13 @@ public class ECBEncryption {
     //
 
     static String decrypt(String text, int blockSize) {
-        return null;
+        blockSize = symbolLenght();
+        var textToBits = textToBits(text);
+        var bitsToBlocks = bitsToBlocks(textToBits, blockSize);
+        var blockShift = decryptBlocks(bitsToBlocks);
+        var blockToBits = blocksToBits(blockShift);
+        var bitsToText = bitsToText(blockToBits, blockSize);
+        return new String(bitsToText);
     }
 
     // ************************************************************
