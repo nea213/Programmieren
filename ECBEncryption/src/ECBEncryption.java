@@ -16,36 +16,46 @@ public class ECBEncryption {
     static HashMap<String, Character> decryptionCodeMap = createDecryptionCodeMap();
 
     public static void main(String[] args) {
-        System.out.println("Willkommen bei PlanetExpress!");
-        System.out.println("Welchen Modus möchten Sie nutzen?");
-        System.out.println("1) Verschlüsselung einer Nachricht");
-        System.out.println("2) Entschlüsselung einer Nachricht");
+        while (true) {
+            System.out.println("Willkommen bei PlanetExpress!");
+            System.out.println("Welchen Modus möchten Sie nutzen?");
+            System.out.println("1) Verschlüsselung einer Nachricht");
+            System.out.println("2) Entschlüsselung einer Nachricht");
+            System.out.println("3) Beenden");
 
-        Scanner sc = new Scanner(System.in); // anlegen von einem Scanner Objekt
-        int userInput = sc.nextInt(); // Einlesen der Auswahl
+            Scanner sc = new Scanner(System.in); // anlegen von einem Scanner Objekt
+            int userInput = sc.nextInt(); // Einlesen der Auswahl
 
-        // Verschluesselung einer Nachricht
-        if (userInput == 1) {
-            System.out.println("Geben Sie den zu verschlüsselnden Text ein:");
-            String inputText = sc.next(); // Einlesen des Textes
-            System.out.println("Geben Sie die Länger der Blöcke (r) an:");
-            int blockSize = sc.nextInt(); // Einlesen der laenge r
-
-            String encryptedText = encrypt(inputText, blockSize); // Verschluesseln der Nachricht
-            System.out.println(encryptedText); // Ausgabe auf der Konsole
-        }
-        // Entschluesselung einer Nachricht
-        if (userInput == 2) {
-            System.out.println("Geben Sie den zu entschlüsselnden Text ein:");
-            String inputText = sc.next(); // Einlesen des Textes
-            System.out.println("Geben Sie die Länger der Blöcke (r) an:");
-            int blockSize = sc.nextInt(); // Einlesen der Laenge r
-
-            String decryptedText = decrypt(inputText, blockSize); // Entschluesseln der Nachricht
-            System.out.println(decryptedText); // Ausgabe auf der Konsole
+            // Verschluesselung einer Nachricht
+            if (userInput == 1) {
+                System.out.println("Geben Sie den zu verschlüsselnden Text ein:");
+                String inputText = sc.next(); // Einlesen des Textes
+                if (isTextOke(inputText)) {
+                    System.out.println("Geben Sie die Länger der Blöcke (r) an:");
+                    int blockSize = sc.nextInt(); // Einlesen der laenge r
+                    String encryptedText = encrypt(inputText, blockSize); // Verschluesseln der Nachricht
+                    System.out.println(encryptedText); // Ausgabe auf der Konsole
+                    break;
+                }
+            }
+            // Entschluesselung einer Nachricht
+            if (userInput == 2) {
+                System.out.println("Geben Sie den zu entschlüsselnden Text ein:");
+                String inputText = sc.next(); // Einlesen des Textes
+                if (isTextOke(inputText)) {
+                    System.out.println("Geben Sie die Länger der Blöcke (r) an:");
+                    int blockSize = sc.nextInt(); // Einlesen der Laenge r
+                    String decryptedText = decrypt(inputText, blockSize); // Entschluesseln der Nachricht
+                    System.out.println(decryptedText); // Ausgabe auf der Konsole
+                    break;
+                }
+            }
+            if (userInput == 3) {
+                sc.close(); // schliessen des Scanner Objekts
+                break;
+            }
         }
         System.out.println("Danke für Ihre Nutzung und auf Wiedersehen!");
-        sc.close(); // schliessen des Scanner Objekts
     }
 
     // ************************************************************
@@ -252,6 +262,20 @@ public class ECBEncryption {
 
     static int symbolLenght() {
         return 5;
+    }
+
+    static boolean isTextOke(String text) {
+        boolean result = true;
+        for (int i = 0; i < text.length(); i++) {
+            if(result) {
+                result = encryptionCodeMap.containsKey(text.charAt(i));
+            } else {
+                System.out.println("Es tut mir leid aber ihr Text enthält unzulässige Zeichen!");
+                System.out.println("Das Zeichen ( " + text.charAt(i - 1) + " ) ist unzulässig\n");
+                break;
+            }
+        }
+        return result;
     }
 
     /**
