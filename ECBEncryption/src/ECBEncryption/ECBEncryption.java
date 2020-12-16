@@ -41,9 +41,11 @@ public class ECBEncryption {
                 if (isTextOke(inputText)) {
                     System.out.println("Geben Sie die Länger der Blöcke (r) an:");
                     int blockSize = sc.nextInt(); // Einlesen der laenge r
-                    String encryptedText = encrypt(inputText, blockSize); // Verschluesseln der Nachricht
-                    System.out.println(encryptedText); // Ausgabe auf der Konsole
-                    break;
+                    if (isBlockSizeOk(inputText, blockSize)) {
+                        String encryptedText = encrypt(inputText, blockSize); // Verschluesseln der Nachricht
+                        System.out.println(encryptedText); // Ausgabe auf der Konsole
+                        break;
+                    }
                 }
             }
             // Entschluesselung einer Nachricht
@@ -53,9 +55,11 @@ public class ECBEncryption {
                 if (isTextOke(inputText)) {
                     System.out.println("Geben Sie die Länger der Blöcke (r) an:");
                     int blockSize = sc.nextInt(); // Einlesen der Laenge r
-                    String decryptedText = decrypt(inputText, blockSize); // Entschluesseln der Nachricht
-                    System.out.println(decryptedText); // Ausgabe auf der Konsole
-                    break;
+                    if(isBlockSizeOk(inputText, blockSize)) {
+                        String decryptedText = decrypt(inputText, blockSize); // Entschluesseln der Nachricht
+                        System.out.println(decryptedText); // Ausgabe auf der Konsole
+                        break;
+                    }
                 }
             }
 
@@ -235,6 +239,15 @@ public class ECBEncryption {
             }
         }
         return result;
+    }
+
+    static boolean isBlockSizeOk(String text, int blockSize) {
+        int textLength = text.length() * symbolLenght();
+        if(textLength < blockSize) {
+            System.out.println("Blockgröße ist zu groß\n");
+            return false;
+        }
+        return true;
     }
 
     public String decryptGUI(String text, int blockSize) {
