@@ -37,7 +37,7 @@ public class ECBEncryption {
             // Verschluesselung einer Nachricht
             if (userInput == 1) {
                 System.out.println("Geben Sie den zu verschlüsselnden Text ein:");
-                String inputText = sc.next(); // Einlesen des Textes
+                String inputText = sc.next().toUpperCase(); // Einlesen des Textes
                 if (isTextOke(inputText)) {
                     System.out.println("Geben Sie die Länger der Blöcke (r) an:");
                     int blockSize = sc.nextInt(); // Einlesen der laenge r
@@ -49,7 +49,7 @@ public class ECBEncryption {
             // Entschluesselung einer Nachricht
             if (userInput == 2) {
                 System.out.println("Geben Sie den zu entschlüsselnden Text ein:");
-                String inputText = sc.next(); // Einlesen des Textes
+                String inputText = sc.next().toUpperCase(); // Einlesen des Textes
                 if (isTextOke(inputText)) {
                     System.out.println("Geben Sie die Länger der Blöcke (r) an:");
                     int blockSize = sc.nextInt(); // Einlesen der Laenge r
