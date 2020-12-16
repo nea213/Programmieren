@@ -24,9 +24,11 @@ public class ECBEncryptionGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String userInput = encryptText.getText().toUpperCase();
-                if (encryption.isTextOkeGUI(userInput) && blockSize.getText().length() > 0) {
-                    String enc = encryption.encryptGUI(userInput, Integer.parseInt(blockSize.getText()));
-                    resultLabel.setText(enc);
+                if (encryption.isTextOkeGUI(userInput) && blockSize.getText().length() > 0 && userInput.length() > 0) {
+                    if (encryption.isBlockSizeOkGUI(userInput, Integer.parseInt(blockSize.getText()))) {
+                        String enc = encryption.encryptGUI(userInput, Integer.parseInt(blockSize.getText()));
+                        resultLabel.setText(enc);
+                    }
                 }
             }
         });
@@ -35,9 +37,11 @@ public class ECBEncryptionGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String userInput = encryptText.getText().toUpperCase();
-                if (encryption.isTextOkeGUI(userInput) && blockSize.getText().length() > 0) {
-                    String dec = encryption.decryptGUI(userInput, Integer.parseInt(blockSize.getText()));
-                    resultLabel.setText(dec);
+                if (encryption.isTextOkeGUI(userInput) && blockSize.getText().length() > 0 && userInput.length() > 0) {
+                    if (encryption.isBlockSizeOkGUI(userInput, Integer.parseInt(blockSize.getText()))) {
+                        String dec = encryption.decryptGUI(userInput, Integer.parseInt(blockSize.getText()));
+                        resultLabel.setText(dec);
+                    }
                 }
             }
         });

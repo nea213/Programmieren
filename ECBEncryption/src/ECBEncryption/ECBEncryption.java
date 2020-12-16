@@ -285,6 +285,20 @@ public class ECBEncryption {
         return result;
     }
 
+    public boolean isBlockSizeOkGUI(String text, int blockSize) {
+        int textLength = text.length() * symbolLenght();
+        if(textLength < blockSize) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Blockgröße ist zu groß",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
+        return true;
+    }
+
     // ************************************************************
     // HIER ENDET IHR QUELLCODE
     //
