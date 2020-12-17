@@ -228,17 +228,14 @@ public class ECBEncryption {
     // Zusatz Aufgaben
 
     static boolean isTextOke(String text) {
-        boolean result = true;
         for (int i = 0; i < text.length(); i++) {
-            if(result) {
-                result = encryptionCodeMap.containsKey(text.charAt(i));
-            } else {
+            if(!encryptionCodeMap.containsKey(text.charAt(i))) {
                 System.out.println("Es tut mir leid aber ihr Text enthält unzulässige Zeichen!");
-                System.out.println("Das Zeichen ( " + text.charAt(i - 1) + " ) ist unzulässig\n");
-                break;
+                System.out.println("Das Zeichen ( " + text.charAt(i) + " ) ist unzulässig\n");
+                return false;
             }
         }
-        return result;
+        return true;
     }
 
     static boolean isBlockSizeOk(String text, int blockSize) {
@@ -269,20 +266,18 @@ public class ECBEncryption {
     }
 
     public boolean isTextOkeGUI(String text) {
-        boolean result = true;
         for (int i = 0; i < text.length(); i++) {
-            result = encryptionCodeMap.containsKey(text.charAt(i));
-            if(!result) {
+            if(!encryptionCodeMap.containsKey(text.charAt(i))) {
                 JOptionPane.showMessageDialog(
                         null,
                         "Der Buchstabe ( " + text.charAt(i) + " ) ist nicht erlaubt",
                         "Der Text enthält unzulassige Zeichen",
                         JOptionPane.ERROR_MESSAGE
                 );
-                return result;
+                return false;
             }
         }
-        return result;
+        return true;
     }
 
     public boolean isBlockSizeOkGUI(String text, int blockSize) {
