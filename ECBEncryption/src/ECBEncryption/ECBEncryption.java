@@ -44,7 +44,6 @@ public class ECBEncryption {
                     if (isBlockSizeOk(inputText, blockSize)) {
                         String encryptedText = encrypt(inputText, blockSize); // Verschluesseln der Nachricht
                         System.out.println(encryptedText); // Ausgabe auf der Konsole
-                        break;
                     }
                 }
             }
@@ -58,7 +57,6 @@ public class ECBEncryption {
                     if(isBlockSizeOk(inputText, blockSize)) {
                         String decryptedText = decrypt(inputText, blockSize); // Entschluesseln der Nachricht
                         System.out.println(decryptedText); // Ausgabe auf der Konsole
-                        break;
                     }
                 }
             }
@@ -132,7 +130,7 @@ public class ECBEncryption {
 
     static char[][] bitsToBlocks(char[] bits, int size) {
         // Das char[] bits zerteilen und zu einem char[][] umwandeln
-        int numberOfBlocks = bits.length / size;
+        var numberOfBlocks = bits.length / size;
         char[][] result = new char[numberOfBlocks][];
 
         for (int i = 0; i < numberOfBlocks; i++) {
@@ -203,11 +201,20 @@ public class ECBEncryption {
 
     static String encrypt(String text, int blockSize) {
         // Aufrufen der einzelen Funktionen zu verschlüsseln einen Textes
-        var textToBits = textToBits(text);
-        var bitsToBlocks = bitsToBlocks(textToBits, blockSize);
+        var textInBits = textToBits(text);
+        var bitsToBlocks = bitsToBlocks(textInBits, blockSize);
         var blockShift = encryptBlocks(bitsToBlocks);
         var blockToBits = blocksToBits(blockShift);
-        var bitsToText = bitsToText(blockToBits, symbolLenght());
+
+        for (int i = 0; i < textInBits.length; i++) {
+            if(i < blockToBits.length) {
+                textInBits[i] = blockToBits[i];
+            } else {
+                break;
+            }
+        }
+
+        var bitsToText = bitsToText(textInBits, symbolLenght());
         return new String(bitsToText);
     }
 
@@ -230,11 +237,20 @@ public class ECBEncryption {
 
     static String decrypt(String text, int blockSize) {
         // Aufrufen der einzelen Funktionen zu entschlüsseln einen Textes
-        var textToBits = textToBits(text);
-        var bitsToBlocks = bitsToBlocks(textToBits, blockSize);
+        var textInBits = textToBits(text);
+        var bitsToBlocks = bitsToBlocks(textInBits, blockSize);
         var blockShift = decryptBlocks(bitsToBlocks);
         var blockToBits = blocksToBits(blockShift);
-        var bitsToText = bitsToText(blockToBits, symbolLenght());
+
+        for (int i = 0; i < textInBits.length; i++) {
+            if(i < blockToBits.length) {
+                textInBits[i] = blockToBits[i];
+            } else {
+                break;
+            }
+        }
+
+        var bitsToText = bitsToText(textInBits, symbolLenght());
         return new String(bitsToText);
     }
 
@@ -264,20 +280,38 @@ public class ECBEncryption {
 
     // Einbau der Funktionen für die GUI
     public String decryptGUI(String text, int blockSize) {
-        var textToBits = textToBits(text);
-        var bitsToBlocks = bitsToBlocks(textToBits, blockSize);
+        var textInBits = textToBits(text);
+        var bitsToBlocks = bitsToBlocks(textInBits, blockSize);
         var blockShift = decryptBlocks(bitsToBlocks);
         var blockToBits = blocksToBits(blockShift);
-        var bitsToText = bitsToText(blockToBits, symbolLenght());
+
+        for (int i = 0; i < textInBits.length; i++) {
+            if(i < blockToBits.length) {
+                textInBits[i] = blockToBits[i];
+            } else {
+                break;
+            }
+        }
+
+        var bitsToText = bitsToText(textInBits, symbolLenght());
         return new String(bitsToText);
     }
 
     public String encryptGUI(String text, int blockSize) {
-        var textToBits = textToBits(text);
-        var bitsToBlocks = bitsToBlocks(textToBits, blockSize);
+        var textInBits = textToBits(text);
+        var bitsToBlocks = bitsToBlocks(textInBits, blockSize);
         var blockShift = encryptBlocks(bitsToBlocks);
         var blockToBits = blocksToBits(blockShift);
-        var bitsToText = bitsToText(blockToBits, symbolLenght());
+
+        for (int i = 0; i < textInBits.length; i++) {
+            if(i < blockToBits.length) {
+                textInBits[i] = blockToBits[i];
+            } else {
+                break;
+            }
+        }
+
+        var bitsToText = bitsToText(textInBits, symbolLenght());
         return new String(bitsToText);
     }
 
