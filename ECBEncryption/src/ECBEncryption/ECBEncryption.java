@@ -9,9 +9,9 @@ import java.util.Scanner;
  *
  * ECB Verschluesselung
  *
- * KLASSE: 11IT  ____   B
+ * KLASSE: 11IT 2B
  *
- * @author IHRE NAMEN
+ * @author Kesmiris Stefanos, Cezanne Christian
  */
 public class ECBEncryption {
 
@@ -67,6 +67,7 @@ public class ECBEncryption {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 ECBEncryptionGUI gui = new ECBEncryptionGUI();
                 gui.runGUI();
+                sc.close(); // schliessen des Scanner Objekts
                 break;
             }
 
@@ -76,6 +77,7 @@ public class ECBEncryption {
             }
         }
         System.out.println("Danke für Ihre Nutzung und auf Wiedersehen!");
+
     }
 
     // ************************************************************
@@ -89,11 +91,13 @@ public class ECBEncryption {
     //
 
     static char[] symbolToBits(char symbol) {
+        // Mit dem Symbol den String aus der encryptionCodeMap herraussuchen und zum char[] umwandeln
         String result = encryptionCodeMap.get(symbol);
         return result.toCharArray();
     }
 
     static char[] textToBits(String text) {
+        // Über den Text iterrienen und das Ergebniss zusammen bauen und zum char[] umwandeln
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
             result.append(encryptionCodeMap.get(text.charAt(i)));
@@ -106,6 +110,7 @@ public class ECBEncryption {
     //
 
     static char[] firstN(char[] bits, int n) {
+        // Die ersten n bits herraus suchen
         char[] result = new char[n];
         for (int i = 0; i < n; i++) {
             result[i] = bits[i];
@@ -114,6 +119,7 @@ public class ECBEncryption {
     }
 
     static char[] lastN(char[] bits, int n) {
+        // Die letzen n bist herraus suchen
         char[] result = new char[bits.length - n];
         int counter = 0;
         for (int i = n; i < bits.length; i++) {
@@ -125,6 +131,7 @@ public class ECBEncryption {
     }
 
     static char[][] bitsToBlocks(char[] bits, int size) {
+        // Das char[] bits zerteilen und zu einem char[][] umwandeln
         int numberOfBlocks = bits.length / size;
         char[][] result = new char[numberOfBlocks][];
 
@@ -144,6 +151,7 @@ public class ECBEncryption {
     //
 
     static char[][] encryptBlocks(char[][] blocks) {
+        // Mit hilfe der shiftRight-Funktion die einzelnen Blöcke verschlüssen
         char[][] result = new char[blocks.length][];
         for (int i = 0; i < blocks.length; i++) {
             result[i] = shiftRight(blocks[i]);
@@ -156,6 +164,7 @@ public class ECBEncryption {
     //
 
     static char[] blocksToBits(char[][] blocks) {
+        // Die zerteilten Blöcke wieder zu einem char[] zusammen fügen
         int lengthOfResultArray = blocks.length * blocks[0].length;
         char[] result = new char[lengthOfResultArray];
 
@@ -174,6 +183,7 @@ public class ECBEncryption {
     //
 
     static char bitsToSymbol(char[] bits) {
+        // Herraus suchen des Symbols aus der decryptionCodeMap
         return decryptionCodeMap.get(new String(bits));
     }
 
@@ -192,6 +202,7 @@ public class ECBEncryption {
     //
 
     static String encrypt(String text, int blockSize) {
+        // Aufrufen der einzelen Funktionen zu verschlüsseln einen Textes
         var textToBits = textToBits(text);
         var bitsToBlocks = bitsToBlocks(textToBits, blockSize);
         var blockShift = encryptBlocks(bitsToBlocks);
@@ -205,6 +216,7 @@ public class ECBEncryption {
     //
 
     static char[][] decryptBlocks(char[][] blocks) {
+        // Mit Hilfe der shiftLeft-Funtion die einzelen Blöcken wieder entschlüsseln
         char[][] result = new char[blocks.length][];
         for (int i = 0; i < blocks.length; i++) {
             result[i] = shiftLeft(blocks[i]);
@@ -217,6 +229,7 @@ public class ECBEncryption {
     //
 
     static String decrypt(String text, int blockSize) {
+        // Aufrufen der einzelen Funktionen zu entschlüsseln einen Textes
         var textToBits = textToBits(text);
         var bitsToBlocks = bitsToBlocks(textToBits, blockSize);
         var blockShift = decryptBlocks(bitsToBlocks);
@@ -228,6 +241,7 @@ public class ECBEncryption {
     // Zusatz Aufgaben
 
     static boolean isTextOke(String text) {
+        // Schauen ob der eingebene Text Zeichen enthält die nicht verschlüsselt werden können
         for (int i = 0; i < text.length(); i++) {
             if(!encryptionCodeMap.containsKey(text.charAt(i))) {
                 System.out.println("Es tut mir leid aber ihr Text enthält unzulässige Zeichen!");
@@ -239,6 +253,7 @@ public class ECBEncryption {
     }
 
     static boolean isBlockSizeOk(String text, int blockSize) {
+        // Checken ob die Blockgröße zu groß ist
         int textLength = text.length() * symbolLenght();
         if(textLength < blockSize) {
             System.out.println("Blockgröße ist zu groß\n");
@@ -247,6 +262,7 @@ public class ECBEncryption {
         return true;
     }
 
+    // Einbau der Funktionen für die GUI
     public String decryptGUI(String text, int blockSize) {
         var textToBits = textToBits(text);
         var bitsToBlocks = bitsToBlocks(textToBits, blockSize);
