@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+import static ECBEncryption.ECBEncryption.*;
+
 public class ECBEncryptionGUI extends JFrame {
     private JTextField encryptText;
     private JTextField blockSize;
@@ -14,19 +17,17 @@ public class ECBEncryptionGUI extends JFrame {
     private JButton encrypt;
     private JButton decrypt;
     private JLabel resultLabel;
-    ECBEncryption encryption = new ECBEncryption();
 
     public ECBEncryptionGUI() {
-
         setSize(500, 500);
 
         encrypt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String userInput = encryptText.getText().toUpperCase();
-                if (encryption.isTextOkeGUI(userInput) && blockSize.getText().length() > 0 && userInput.length() > 0) {
-                    if (encryption.isBlockSizeOkGUI(userInput, Integer.parseInt(blockSize.getText()))) {
-                        String enc = encryption.encryptGUI(userInput, Integer.parseInt(blockSize.getText()));
+                if (isTextOkeGUI(userInput) && blockSize.getText().length() > 0 && userInput.length() > 0) {
+                    if (isBlockSizeOkGUI(userInput, Integer.parseInt(blockSize.getText()))) {
+                        String enc = encryptGUI(userInput, Integer.parseInt(blockSize.getText()));
                         resultLabel.setText(enc);
                     }
                 }
@@ -37,9 +38,9 @@ public class ECBEncryptionGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String userInput = encryptText.getText().toUpperCase();
-                if (encryption.isTextOkeGUI(userInput) && blockSize.getText().length() > 0 && userInput.length() > 0) {
-                    if (encryption.isBlockSizeOkGUI(userInput, Integer.parseInt(blockSize.getText()))) {
-                        String dec = encryption.decryptGUI(userInput, Integer.parseInt(blockSize.getText()));
+                if (isTextOkeGUI(userInput) && blockSize.getText().length() > 0 && userInput.length() > 0) {
+                    if (isBlockSizeOkGUI(userInput, Integer.parseInt(blockSize.getText()))) {
+                        String dec = decryptGUI(userInput, Integer.parseInt(blockSize.getText()));
                         resultLabel.setText(dec);
                     }
                 }
@@ -53,6 +54,71 @@ public class ECBEncryptionGUI extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    public String decryptGUI(String text, int blockSize) {
+        var textInBits = textToBits(text);
+        var bitsToBlocks = bitsToBlocks(textInBits, blockSize);
+        var blockShift = decryptBlocks(bitsToBlocks);
+        var blockToBits = blocksToBits(blockShift);
+
+        for (int i = 0; i < textInBits.length; i++) {
+            if (i < blockToBits.length) {
+                textInBits[i] = blockToBits[i];
+            } else {
+                break;
+            }
+        }
+
+        var bitsToText = bitsToText(textInBits, symbolLenght());
+        return new String(bitsToText);
+    }
+
+    public String encryptGUI(String text, int blockSize) {
+        var textInBits = textToBits(text);
+        var bitsToBlocks = bitsToBlocks(textInBits, blockSize);
+        var blockShift = encryptBlocks(bitsToBlocks);
+        var blockToBits = blocksToBits(blockShift);
+
+        for (int i = 0; i < textInBits.length; i++) {
+            if (i < blockToBits.length) {
+                textInBits[i] = blockToBits[i];
+            } else {
+                break;
+            }
+        }
+
+        var bitsToText = bitsToText(textInBits, symbolLenght());
+        return new String(bitsToText);
+    }
+
+    public boolean isTextOkeGUI(String text) {
+        for (int i = 0; i < text.length(); i++) {
+            if (!encryptionCodeMap.containsKey(text.charAt(i))) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Der Buchstabe ( " + text.charAt(i) + " ) ist nicht erlaubt",
+                        "Der Text enthält unzulassige Zeichen",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isBlockSizeOkGUI(String text, int blockSize) {
+        int textLength = text.length() * symbolLenght();
+        if (textLength < blockSize) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Blockgröße ist zu groß",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
+        return true;
     }
 
     {
