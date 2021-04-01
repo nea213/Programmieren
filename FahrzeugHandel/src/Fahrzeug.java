@@ -4,6 +4,7 @@ public class Fahrzeug {
     private String _Farbe;
     private double _Preis;
     private boolean _IstGebrauchtWaggen;
+    private int _FahrzeugId;
 
     public Fahrzeug(String _Hersteller, int _Laufzeig, String _Farbe, double _Preis, boolean _IstGebrauchtWaggen) {
         this._Hersteller = _Hersteller;
@@ -11,6 +12,14 @@ public class Fahrzeug {
         this._Farbe = _Farbe;
         this._Preis = _Preis;
         this._IstGebrauchtWaggen = _IstGebrauchtWaggen;
+    }
+
+    public int get_FahrzeugId() {
+        return _FahrzeugId;
+    }
+
+    public void set_FahrzeugId(int _FahrzeugId) {
+        this._FahrzeugId = _FahrzeugId;
     }
 
     public String get_Hersteller() {

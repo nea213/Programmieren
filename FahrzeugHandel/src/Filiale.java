@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Objects;
 
 public class Filiale {
     private String _Standort;
@@ -40,8 +42,23 @@ public class Filiale {
     }
 
     public void set_Fahrzeug(Fahrzeug fahrzeug) {
+        if (this._FahrzeugAnzahl == 0) {
+            fahrzeug.set_FahrzeugId(1);
+        } else {
+            var maxId = Objects.requireNonNull(this._Fahrzeuge.stream().max(Comparator.comparing(Fahrzeug::get_FahrzeugId)).orElse(null)).get_FahrzeugId();
+            fahrzeug.set_FahrzeugId(maxId + 1);
+        }
         this._FahrzeugAnzahl += 1;
         this._Fahrzeuge.add(fahrzeug);
+    }
+
+    public Fahrzeug get_Fahrzeug(int id) {
+        return this._Fahrzeuge.stream().filter(fahrzeug -> fahrzeug.get_FahrzeugId() == id).findFirst().orElse(null);
+    }
+
+    public void entferne_Fahrzeug(int id) {
+        this._Fahrzeuge.removeIf(fahrzeug -> fahrzeug.get_FahrzeugId() == id);
+        this._FahrzeugAnzahl -= 1;
     }
 
     public void ausgabeAllerFahrzeugDaten() {
