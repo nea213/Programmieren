@@ -109,4 +109,10 @@ public class Filiale {
             System.out.println("\n");
         }
     }
+
+    public void prozentualeAnzahl(TreibstoffType treibstoffType) {
+        var countedCars = (double) this._Fahrzeuge.stream().filter(fahrzeug -> fahrzeug.get_TreibstoffType() == treibstoffType).count();
+        var temp = (countedCars / (double) this._FahrzeugAnzahl) * 100;
+        System.out.println(temp);
+    }
 }

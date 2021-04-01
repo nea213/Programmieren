@@ -5,13 +5,23 @@ public class Fahrzeug {
     private double _Preis;
     private boolean _IstGebrauchtWaggen;
     private int _FahrzeugId;
+    private TreibstoffType _TreibstoffType;
 
-    public Fahrzeug(String _Hersteller, int _Laufzeig, String _Farbe, double _Preis, boolean _IstGebrauchtWaggen) {
+    public Fahrzeug(String _Hersteller, int _Laufzeig, String _Farbe, double _Preis, boolean _IstGebrauchtWaggen, TreibstoffType treibstoffType) {
         this._Hersteller = _Hersteller;
         this._Laufzeit = _Laufzeig;
         this._Farbe = _Farbe;
         this._Preis = _Preis;
         this._IstGebrauchtWaggen = _IstGebrauchtWaggen;
+        this._TreibstoffType = treibstoffType;
+    }
+
+    public TreibstoffType get_TreibstoffType() {
+        return _TreibstoffType;
+    }
+
+    public void set_TreibstoffType(TreibstoffType _TreibstoffType) {
+        this._TreibstoffType = _TreibstoffType;
     }
 
     public int get_FahrzeugId() {
@@ -51,6 +61,10 @@ public class Fahrzeug {
     }
 
     public void set_Preis(double _Preis) {
+        if (_Preis < 200.00) {
+            System.out.println("Der Preis darf nicht weniger kosten als 200€");
+            return;
+        }
         this._Preis = _Preis;
     }
 
