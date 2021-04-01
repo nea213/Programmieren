@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Filiale {
     private String _Standort;
@@ -59,6 +60,39 @@ public class Filiale {
     public void entferne_Fahrzeug(int id) {
         this._Fahrzeuge.removeIf(fahrzeug -> fahrzeug.get_FahrzeugId() == id);
         this._FahrzeugAnzahl -= 1;
+    }
+
+    public void ausgabeGebrauchtOderNeu(boolean istGebraucht) {
+        if (istGebraucht) {
+            var temp = this._Fahrzeuge.stream().filter(Fahrzeug::is_IstGebrauchtWaggen).collect(Collectors.toList());
+            for (var f : temp) {
+                var isGebraucht = f.is_IstGebrauchtWaggen() ? "Gebrauchtwaggen" : "Neuwaggen";
+                System.out.println("_____________Filiale: " + this._Name + "_______________________");
+                System.out.println("Fahrzeug Id: " + f.get_FahrzeugId());
+                System.out.println("Herstelller: " + f.get_Hersteller());
+                System.out.println("Farbe: " + f.get_Farbe());
+                System.out.println("Laufzeit in km: " + f.get_Laufzeit());
+                System.out.println("Preis: " + f.get_Preis());
+                System.out.println("Gebrauchtwaggen/Neuwaggen: " + isGebraucht);
+                System.out.println("_____________Filiale: " + this._Name + "_______________________");
+                System.out.println("\n");
+            }
+        } else {
+            var temp = this._Fahrzeuge.stream().filter(Fahrzeug -> !Fahrzeug.is_IstGebrauchtWaggen()).collect(Collectors.toList());
+            for (var f : temp) {
+                var isGebraucht = f.is_IstGebrauchtWaggen() ? "Gebrauchtwaggen" : "Neuwaggen";
+                System.out.println("_____________Filiale: " + this._Name + "_______________________");
+                System.out.println("Fahrzeug Id: " + f.get_FahrzeugId());
+                System.out.println("Herstelller: " + f.get_Hersteller());
+                System.out.println("Farbe: " + f.get_Farbe());
+                System.out.println("Laufzeit in km: " + f.get_Laufzeit());
+                System.out.println("Preis: " + f.get_Preis());
+                System.out.println("Gebrauchtwaggen/Neuwaggen: " + isGebraucht);
+                System.out.println("_____________Filiale: " + this._Name + "_______________________");
+                System.out.println("\n");
+            }
+        }
+
     }
 
     public void ausgabeAllerFahrzeugDaten() {

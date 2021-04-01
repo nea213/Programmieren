@@ -14,15 +14,26 @@ public class AutohausUI {
         var auto1 = new Fahrzeug("Audi", 10, "Grau", 33333.33, false);
         var filale2 = new Filiale("Rüsselsheim", "Autohaus Opel", 2);
         var auto2 = new Fahrzeug("Opel", 10, "Rot", 30000.00, false);
+        var auto3 = new Fahrzeug("Opel", 10, "Gelb", 30000.00, true);
+        var auto4 = new Fahrzeug("Opel", 10, "Blau", 30000.00, false);
+        var auto5 = new Fahrzeug("Opel", 10, "Pink", 30000.00, true);
 
         filale1.set_Fahrzeug(auto1);
-        filale1.ausgabeAllerFahrzeugDaten();
         filale2.set_Fahrzeug(auto2);
-        filale2.ausgabeAllerFahrzeugDaten();
+        filale1.set_Fahrzeug(auto3);
+        filale1.set_Fahrzeug(auto4);
+        filale1.set_Fahrzeug(auto5);
 
+        // normale ausgabe von fahrzeugen
+//        filale1.ausgabeAllerFahrzeugDaten();
+//        filale2.ausgabeAllerFahrzeugDaten();
 
-        moveCars(filale1, filale2, auto1.get_FahrzeugId());
-        filale2.ausgabeAllerFahrzeugDaten();
-        filale1.ausgabeAllerFahrzeugDaten();
+        // Fahrzeuge von einer Filiale zu einer andern bewegen
+//        moveCars(filale1, filale2, auto1.get_FahrzeugId());
+//        filale2.ausgabeAllerFahrzeugDaten();
+//        filale1.ausgabeAllerFahrzeugDaten();
+
+        // Nur gebraucht oder Neu Waggen anzeigen
+//        filale1.ausgabeGebrauchtOderNeu(true);
     }
 }
