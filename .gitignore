@@ -15,3 +15,5 @@ Programmieren_11ITDiff/
 Lohnbuchhaltung/.idea/
 
 FahrzeugHandel/.idea/
+
+*.idea*
